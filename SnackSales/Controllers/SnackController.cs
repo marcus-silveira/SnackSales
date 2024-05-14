@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SnackSales.Repositories.Interfaces;
+using SnackSales.ViewModels;
 
 namespace SnackSales.Controllers
 {
@@ -15,8 +16,12 @@ namespace SnackSales.Controllers
 
         public IActionResult List()
         {
-            var snacks = _repository.GetAll().Include(c=> c.Category).ToList();
-            return View(snacks);
+            var snacksListViewModel = new SnackListViewModel
+            {
+                Snacks = _repository.GetAll().Include(c => c.Category).ToList(),
+                CurrentCategory = "Categoria atual"
+            };
+            return View(snacksListViewModel);
         }
     }
 }

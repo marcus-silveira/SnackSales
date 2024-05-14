@@ -11,5 +11,8 @@ namespace SnackSales.Context
 
         public DbSet<Category> Categories { get; set; }
         public DbSet<Snack> Snacks { get; set; }
-    }
+        public DbSet<OrderItem?> OrderItems { get; set; }
+        public DbSet<Order> Orders { get; set; }
+
+	}
 }

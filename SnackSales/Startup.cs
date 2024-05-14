@@ -21,6 +21,12 @@ public class Startup
         services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DevConnection")));
         services.AddScoped<ICategoryRepository, CategoryRepository>();
         services.AddScoped<ISnackRepository, SnackRepository>();
+        services.AddScoped<IOrderRepository, OrderRepository>();
+
+		services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+        services.AddMemoryCache();
+        services.AddSession();
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -40,6 +46,7 @@ public class Startup
         app.UseStaticFiles();
 
         app.UseRouting();
+        app.UseSession();
 
         app.UseAuthorization();
 
